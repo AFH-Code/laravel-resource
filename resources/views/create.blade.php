@@ -28,6 +28,18 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        <div class="field">
+                            <label class="label">Catégorie</label>
+                            <div class="form-group">
+                                <select name="category_id" class="form-control">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="field">
                             <label class="label">Description</label>
                             <div class="form-group">

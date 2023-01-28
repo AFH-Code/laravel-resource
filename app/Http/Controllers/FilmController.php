@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Film;
+use App\Models\{Film, Category};
 use App\Http\Requests\Film as FilmRequest;
 
 class FilmController extends Controller
@@ -13,10 +13,12 @@ class FilmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug = null)
     {
-        $films = Film::paginate(5);
-        return view('index', compact('films'));
+        $query = $slug ? Category::whereSlug($slug)->firstOrFail()->films() : Film::query();
+        $films = $query->oldest('title')->paginate(5);
+        $categories = Category::all();
+        return view('index', compact('films', 'categories', 'slug'));
     }
 
     /**
@@ -26,7 +28,8 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create', compact('categories'));
     }
 
     /**
@@ -49,7 +52,8 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        return view('show', compact('film'));
+        $category = $film->category->name;    
+        return view('show', compact('film', 'category'));
     }
 
     /**
@@ -60,7 +64,8 @@ class FilmController extends Controller
      */
     public function edit(Film $film)
     {
-        return view('edit', compact('film'));
+        $categories = Category::all();
+        return view('edit', compact('film', 'categories'));
     }
 
     /**
