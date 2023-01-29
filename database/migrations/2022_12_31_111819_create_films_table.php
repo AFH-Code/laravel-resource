@@ -20,13 +20,6 @@ class CreateFilmsTable extends Migration
             $table->year('year');
             $table->text('description');
             $table->timestamps();
-
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
         });
     }
 

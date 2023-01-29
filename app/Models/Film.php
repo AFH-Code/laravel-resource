@@ -11,8 +11,8 @@ class Film extends Model
     
     protected $fillable = ['title', 'year', 'description'];
 
-    public function category()
-    { 
-        return $this->belongsTo(Category::class); 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }
