@@ -30,6 +30,17 @@
                             </div>
                         </div>
                         <div class="field">
+                            <label class="label">Catégories</label>
+                            <div class="form-group">
+                                <select class="form-control" name="cats[]" multiple>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ in_array($category->id, old('cats') ?: $film->categories->pluck('id')->all()) ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
                             <label class="label">Description</label>
                             <div class="form-group">
                                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description du film">{{ old('description', $film->description) }}</textarea>

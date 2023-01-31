@@ -10,6 +10,14 @@
         <div class="card">
             <header class="card-header">
                 <a class="btn btn-info float-right" href="{{ route('films.create') }}">Créer un film</a>
+                <div class="form-group" style="float: right;">
+                <select onchange="window.location.href = this.value" class="form-control" style="width: 200px; margin-right: 7px;">
+                    <option value="{{ route('films.index') }}" @unless($slug) selected @endunless>Toutes catégories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ route('films.category', $category->slug) }}" {{ $slug == $category->slug ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                </div>
                 <p class="card-header-title">Films</p>
             </header>
             <div class="card-content">
