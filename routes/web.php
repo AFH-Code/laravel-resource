@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,7 @@ Route::get('/', function () {
 
 Route::get('users', [UserController::class, 'create']);
 Route::post('users', [UserController::class, 'store']);
+
+Route::get('contact', [ContactController::class, 'contact']);
+Route::post('contact', [ContactController::class, 'store']);
 
